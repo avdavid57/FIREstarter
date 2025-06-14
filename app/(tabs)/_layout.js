@@ -107,6 +107,7 @@ export default function TabLayout() {
         options={{
           title: 'Chat',
           tabBarIcon: ({ color }) => <TabImage source={require('../../assets/agent.png')} />,
+          headerShown: false,
         }}
       />
       <Tabs.Screen

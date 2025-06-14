@@ -9,6 +9,7 @@ import styles from '../styles/ChatScreenStyles';
 // Import API_ENDPOINT from environment variables
 import { API_ENDPOINT } from '@env';
 
+// TODO: Remove this dummy messages
 const dummyMessages = [
   { id: '1', from: 'agent', text: 'How can I assist you?', avatar: require('../assets/agent.png') },
   { id: '2', from: 'user', text: "What's my FIRE progress?", avatar: require('../assets/user.png') },
@@ -110,7 +111,7 @@ export default function ChatScreen() {
   const headerHeight = 100; // Approximate height based on previous header adjustments
 
   return (
-    <View style={[styles.container, { flex: 1, backgroundColor: '#fff' }]}>
+    <View style={[styles.container, { flex: 1, backgroundColor: '#fff', paddingTop: insets.top }]}>
       <KeyboardAvoidingView 
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={{ flex: 1 }}

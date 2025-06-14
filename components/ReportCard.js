@@ -3,83 +3,86 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 
 export default function ReportCard({ report }) {
+  const reportTitle = report.title || 'Report'; // Default title if not provided
+  const displayData = Object.entries(report).filter(([key]) => key !== 'title');
+
   return (
     <View style={styles.container}>
-      {/* Report title */}
-      <Text style={styles.reportTitle}>Report</Text>
+      <Text style={styles.reportTitle}>{reportTitle}</Text>
 
-      {/* Progress Section */}
-      <TouchableOpacity style={styles.sectionContainer}>
-        <View>
-          <Text style={styles.sectionTitle}>Progress</Text>
-          <Text style={styles.detailText}>Goal: {report.goal}</Text>
-          <Text style={styles.detailText}>Networth: {report.networth}</Text>
-          <Text style={styles.detailText}>Monthly Savings: {report.monthly}</Text>
+      {displayData.map(([key, value]) => (
+        <View key={key} style={styles.detailRow}>
+          <Text style={styles.detailLabel}>{key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}:</Text>
+          <Text style={styles.detailValue}>{value}</Text>
         </View>
-        <FontAwesome name="angle-right" size={24} color="#9CA3AF" />
-      </TouchableOpacity>
+      ))}
 
-      {/* FIRE Timeline Section */}
-      <TouchableOpacity style={styles.sectionContainer}>
-        <View>
-          <Text style={styles.sectionTitle}>FIRE Timeline</Text>
-          <Text style={styles.detailText}>Retire Year: {report.retireYear}</Text>
-          <Text style={styles.detailText}>10% Growth: {report.growthYear}</Text>
-        </View>
-        <FontAwesome name="angle-right" size={24} color="#9CA3AF" />
-      </TouchableOpacity>
-
-      {/* Grade Section */}
-      <TouchableOpacity style={styles.sectionContainer}>
-        <View>
-          <Text style={styles.sectionTitle}>Grade</Text>
-          <Text style={styles.detailText}>Savings rate: {report.savingsRate}</Text>
-          <Text style={styles.detailText}>Grade: {report.grade}</Text>
-        </View>
-        <FontAwesome name="angle-right" size={24} color="#9CA3AF" />
-      </TouchableOpacity>
+      {/* You can add a common action button here if needed */}
+      {/* <TouchableOpacity style={styles.actionButton}>
+        <Text style={styles.actionButtonText}>View Details</Text>
+        <FontAwesome name="angle-right" size={20} color="#FFFFFF" />
+      </TouchableOpacity> */}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#FFFFFF', // White background
+    backgroundColor: '#F9FAFB',
     borderRadius: 12,
-    padding: 16,
-    marginVertical: 8,
-    // Add shadow if needed to match the image
-    shadowColor: "#000",
+    padding: 20,
+    marginVertical: 10,
+    width: '75%',
+    alignSelf: 'center',
+    shadowColor: "#1F2937",
     shadowOffset: {
       width: 0,
-      height: 1,
+      height: 4,
     },
-    shadowOpacity: 0.22,
-    shadowRadius: 2.22,
-    elevation: 3,
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    elevation: 6,
   },
   reportTitle: {
-    fontSize: 18,
+    fontSize: 22,
     fontWeight: 'bold',
-    marginBottom: 12,
-    color: '#1F2937', // Dark text color
+    marginBottom: 20,
+    color: '#2D3748',
+    textAlign: 'center',
   },
-  sectionContainer: {
+  detailRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingVertical: 10,
+    paddingVertical: 12,
     borderBottomWidth: 1,
-    borderBottomColor: '#E5E7EB', // Light grey border
+    borderBottomColor: '#EDF2F7',
   },
-  sectionTitle: {
+  detailLabel: {
     fontSize: 16,
-    fontWeight: 'bold',
-    color: '#1F2937', // Dark text color
-    marginBottom: 4,
+    color: '#4A5568',
+    fontWeight: '500',
+    flex: 1,
+    paddingRight: 10,
   },
-  detailText: {
-    fontSize: 14,
-    color: '#4B5563', // Medium grey text color
+  detailValue: {
+    fontSize: 16,
+    color: '#2D3748',
+    fontWeight: '600',
+    textAlign: 'right',
+  },
+  actionButton: {
+    backgroundColor: '#4C51BF',
+    padding: 14,
+    borderRadius: 10,
+    marginTop: 20,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  actionButtonText: {
+    color: '#FFFFFF',
+    fontSize: 17,
+    fontWeight: 'bold',
+    marginRight: 8,
   },
 }); 
