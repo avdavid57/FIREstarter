@@ -6,6 +6,10 @@ function TabBarIcon(props) {
   return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
 }
 
+function TabImage(props) {
+  return <Image source={props.source} style={{ width: 28, height: 28, marginBottom: -3 }} />;
+}
+
 function CustomHeader({ avatarSource, networth, onMenuPress }) {
   return (
     <View style={headerStyles.container}>
@@ -27,7 +31,7 @@ const headerStyles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     flex: 1,
   },
   avatarContainer: {
@@ -39,10 +43,10 @@ const headerStyles = StyleSheet.create({
     borderRadius: 15,
   },
   infoContainer: {
-    flex: 1,
+    marginRight: 'auto',
   },
   networthValue: {
-    fontSize: 16,
+    fontSize: 24,
     fontWeight: 'bold',
     color: '#000',
   },
@@ -82,34 +86,13 @@ export default function TabLayout() {
         },
         headerTitleAlign: 'left',
       }}
+      initialRouteName="chat"
     >
       <Tabs.Screen
         name="index"
         options={{
           title: 'Home',
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
-          headerTitle: () => (
-            <CustomHeader
-              avatarSource={require('../../assets/user.png')}
-              networth="$700,000"
-              onMenuPress={() => console.log('Menu pressed')}
-            />
-          ),
-          headerStyle: {
-            backgroundColor: '#E0F7FA',
-            borderBottomLeftRadius: 20,
-            borderBottomRightRadius: 20,
-            height: 100,
-          },
-          headerShadowVisible: false,
-          headerTitleContainerStyle: {
-            left: 0,
-            right: 0,
-            paddingHorizontal: 16,
-            paddingBottom: 10,
-            flex: 1,
-          },
-          headerTitleAlign: 'left',
         }}
       />
       <Tabs.Screen
@@ -117,6 +100,13 @@ export default function TabLayout() {
         options={{
           title: 'Activity',
           tabBarIcon: ({ color }) => <TabBarIcon name="list" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="chat"
+        options={{
+          title: 'Chat',
+          tabBarIcon: ({ color }) => <TabImage source={require('../../assets/agent.png')} />,
         }}
       />
       <Tabs.Screen

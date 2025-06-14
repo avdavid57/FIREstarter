@@ -1,5 +1,9 @@
-import ChatScreen from '../ChatScreen';
+import { View, Text } from 'react-native';
 
 export default function TabOneScreen() {
-  return <ChatScreen />;
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Home Screen - Blank</Text>
+    </View>
+  );
 } 
